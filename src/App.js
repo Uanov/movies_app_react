@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import './assets/style/_normalize.scss';
+import './assets/style/_variables.scss';
+import './App.scss';
+import {MoviesList} from './components/MoviesList';
+import {FindMovie} from './components/FindMovie';
+import putMovieIntoDB from './api/putMovieIntoDB';
+import {getMovieDB} from './api/getMovieDB';
+import {Header} from "./components/Header/Header";
 
-function App() {
+export const App = () => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await getMovieDB('/auth/allMovies');
+
+      setMovies([...data]);
+    })();
+  }, []);
+
+  const handleAddMovies = (movie) => {
+    if (!movies.find(item => item.imdbID === movie.imdbID)) {
+      setMovies([...movies, movie]);
+      console.log(movie);
+      putMovieIntoDB(movie);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <div className="page">
+        <div className="page-content">
+          <MoviesList movies={movies}/>
+        </div>
+        <div className="sidebar">
+          <FindMovie handleAddMovies={handleAddMovies}/>
+        </div>
+      </div>
+    </>
   );
-}
+};
 
-export default App;

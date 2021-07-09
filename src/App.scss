@@ -1,0 +1,34 @@
+@import "assets/style/normalize";
+@import "assets/style/variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.page {
+  display: grid;
+  grid-template: auto / 1fr 400px;
+  column-gap: 20px;
+  min-height: 100vh;
+}
+
+.page-content {
+  padding: 20px;
+}
+
+.sidebar {
+  padding: 20px;
+  border-left: 1px solid lightgray;
+}
+
+.wrap {
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}

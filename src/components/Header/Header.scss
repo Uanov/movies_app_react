@@ -1,0 +1,26 @@
+@import "src/assets/style/variables";
+
+.header {
+  padding: 15px 0;
+  background-color: $black;
+
+  &-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+  }
+}
+
+
+.logo {
+  max-width: 65px;
+  cursor: pointer;
+
+  &__image {
+    width: 100%;
+    display: block;
+  }
+
+}
+
+
